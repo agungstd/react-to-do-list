@@ -15,7 +15,7 @@ function Dashboard() {
   const getActivities = () => dispatch(TodoActions.getActivitiesRequest());
   useEffect(() => {
     titlePage({
-      title: "To Do List - Dashboard",
+      title: "To Do List New - Dashboard",
     });
     getActivities();
     // eslint-disable-next-line react-hooks/exhaustive-deps
