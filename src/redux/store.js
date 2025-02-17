@@ -6,14 +6,12 @@ import rootSaga from "../sagas/rootSaga";
 import { rootReducer } from "./rootReducer";
 
 const sagaMiddleware = createSagaMiddleware();
-const middleware = [
-  ...getDefaultMiddleware({
-    immutableCheck: false,
-    serializableCheck: false,
-    thunk: true,
-  }),
-  sagaMiddleware,
-];
+
+const middleware = getDefaultMiddleware({
+  immutableCheck: false,
+  serializableCheck: false,
+  thunk: true,
+}).concat(sagaMiddleware);
 
 const store = configureStore({
   reducer: rootReducer,
@@ -22,10 +20,6 @@ const store = configureStore({
   enhancers: [reduxBatch],
 });
 
-/**
- * @see https://github.com/rt2zz/redux-persist#persiststorestore-config-callback
- * @see https://github.com/rt2zz/redux-persist#persistor-object
- */
 export const persistor = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
